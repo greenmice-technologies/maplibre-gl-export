@@ -200,7 +200,7 @@ export abstract class MapGeneratorBase {
 			overlayBackgroundColor: '#5D5959',
 			overlayOpacity: '0.6',
 			spinnerIcon: 'ball-spin',
-			spinnerColor: '#2400FD',
+			spinnerColor: '#ec1968',
 			spinnerSize: '2x',
 			overlayIDName: 'overlay',
 			spinnerIDName: 'spinner',
@@ -574,6 +574,11 @@ export abstract class MapGeneratorBase {
 	 */
 	private toJPEG(canvas: HTMLCanvasElement, fileName: string) {
 		const uri = canvas.toDataURL('image/jpeg', 0.85);
+		// create a File object
+		const file = new File([uri], fileName, { type: 'image/jpeg' });
+
+		// emit a map event 'export.jpeg' with the file object
+		this.map.fire('export.jpeg', { file });
 		const a = document.createElement('a');
 		a.href = uri;
 		a.download = fileName;

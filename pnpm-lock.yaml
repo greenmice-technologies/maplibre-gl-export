@@ -11,6 +11,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.27.7
         version: 2.27.8
+      '@watergis/maplibre-gl-export':
+        specifier: file:../maplibre-gl-export
+        version: '@greenmice/maplibre-gl-export@file:'
       lefthook:
         specifier: ^1.7.14
         version: 1.7.15
@@ -494,6 +497,10 @@ packages:
   '@eslint/plugin-kit@0.1.0':
     resolution: {integrity: sha512-autAXT203ixhqei9xt+qkYOvY8l6LAFIdT2UXc/RPNeUVfqRF1BV94GTJyVPFKT8nFM6MyVJhjLj9E8JWvf5zQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@greenmice/maplibre-gl-export@file:':
+    resolution: {directory: '', type: directory}
+    engines: {pnpm: ^9.0.0}
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -3043,6 +3050,8 @@ snapshots:
   '@eslint/plugin-kit@0.1.0':
     dependencies:
       levn: 0.4.1
+
+  '@greenmice/maplibre-gl-export@file:': {}
 
   '@humanwhocodes/module-importer@1.0.1': {}
 
