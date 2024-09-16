@@ -200,7 +200,7 @@ export abstract class MapGeneratorBase {
 			overlayBackgroundColor: '#5D5959',
 			overlayOpacity: '0.6',
 			spinnerIcon: 'ball-spin',
-			spinnerColor: '#ec1968',
+			spinnerColor: '#007bff',
 			spinnerSize: '2x',
 			overlayIDName: 'overlay',
 			spinnerIDName: 'spinner',
@@ -560,8 +560,27 @@ export abstract class MapGeneratorBase {
 	 * @param fileName file name
 	 */
 	private toPNG(canvas: HTMLCanvasElement, fileName: string) {
+		function dataURLtoFile(dataurl, filename) {
+			// Split the data URL to get the MIME type and the base64 data
+			const arr = dataurl.split(',');
+			const mime = arr[0].match(/:(.*?);/)[1];
+			const bstr = atob(arr[1]);
+			let n = bstr.length;
+			const u8arr = new Uint8Array(n);
+
+			// Convert the base64 data to a byte array
+			while (n--) {
+				u8arr[n] = bstr.charCodeAt(n);
+			}
+
+			// Create and return the file
+			return new File([u8arr], filename, { type: mime });
+		}
+
 		const a = document.createElement('a');
 		a.href = canvas.toDataURL();
+		const file = dataURLtoFile(a.href, fileName);
+		this.map.fire('export', { file });
 		a.download = fileName;
 		a.click();
 		a.remove();
@@ -576,9 +595,7 @@ export abstract class MapGeneratorBase {
 		const uri = canvas.toDataURL('image/jpeg', 0.85);
 		// create a File object
 		const file = new File([uri], fileName, { type: 'image/jpeg' });
-
-		// emit a map event 'export.jpeg' with the file object
-		this.map.fire('export.jpeg', { file });
+		this.map.fire('export', { file });
 		const a = document.createElement('a');
 		a.href = uri;
 		a.download = fileName;
