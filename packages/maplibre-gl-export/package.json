@@ -1,6 +1,6 @@
 {
 	"name": "@greenmice/maplibre-gl-export",
-	"version": "3.8.3",
+	"version": "3.8.4",
 	"private": false,
 	"description": "This module adds control which can export PDF and images.",
 	"type": "module",
