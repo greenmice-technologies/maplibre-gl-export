@@ -632,9 +632,12 @@ export abstract class MapGeneratorBase {
 		pdf.setProperties({
 			title: map.getStyle().name,
 			subject: `center: [${lng}, ${lat}], zoom: ${map.getZoom()}`,
-			creator: 'Mapbox GL Export Plugin',
+			creator: 'Gaia Export Plugin',
 			author: '(c)Mapbox, (c)OpenStreetMap'
 		});
+
+		const file = new File([pdf.output('blob')], fileName, { type: 'application/pdf' });
+		this.map.fire('export', { file });
 
 		pdf.save(fileName);
 	}
@@ -661,6 +664,9 @@ export abstract class MapGeneratorBase {
         <image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  
       xlink:href="${uri}" width="${pxWidth}" height="${pxHeight}"></image>
     </svg>`;
+
+		const file = new File([svg], fileName, { type: 'application/xml' });
+		this.map.fire('export', { file });
 
 		const a = document.createElement('a');
 		a.href = `data:application/xml,${encodeURIComponent(svg)}`;
