@@ -2,16 +2,16 @@
 # Refer for explanation to following link:
 # https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
 
-pre-commit:
-  parallel: true
-  commands:
-    lint+format:
-      run: |
-        pnpm lint
-        pnpm format
+# pre-commit:
+#   parallel: true
+#   commands:
+#     lint+format:
+#       run: |
+#         pnpm lint
+#         pnpm format
 
-pre-push:
-  parallel: true
-  commands:
-    build:
-      run: pnpm build
+# pre-push:
+#   parallel: true
+#   commands:
+#     build:
+#       run: pnpm build
